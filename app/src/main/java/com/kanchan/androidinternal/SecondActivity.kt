@@ -1,4 +1,4 @@
-package com.kanchan.androidsysteminternalworking
+package com.kanchan.androidinternal
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.kanchan.androidsysteminternalworking.databinding.FragmentSecondBinding
-import com.kanchan.androidsysteminternalworking.notifications.NotificationBuilder
+import com.kanchan.androidinternal.databinding.FragmentSecondBinding
+import com.kanchan.androidinternal.notifications.NotificationBuilder
 import com.kanchan.backstack.ThirdActivity
 import kotlinx.android.synthetic.main.fragment_second.*
 

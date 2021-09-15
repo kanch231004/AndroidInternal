@@ -1,4 +1,4 @@
-package com.kanchan.androidsysteminternalworking
+package com.kanchan.androidinternal
 
 import android.content.Context
 import android.os.Bundle
@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import com.kanchan.androidsysteminternalworking.databinding.FragmentFirstBinding
+import com.kanchan.androidinternal.databinding.FragmentFirstBinding
 import kotlinx.android.synthetic.main.fragment_first.*
 
 /**

@@ -1,4 +1,4 @@
-package com.kanchan.androidsysteminternalworking.notifications;
+package com.kanchan.androidinternal.notifications;
 
 import java.util.ArrayList;
 import java.util.List;

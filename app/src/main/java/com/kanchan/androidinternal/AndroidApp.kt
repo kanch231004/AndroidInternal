@@ -1,7 +1,7 @@
-package com.kanchan.androidsysteminternalworking
+package com.kanchan.androidinternal
 
 import android.app.Application
-import com.kanchan.androidsysteminternalworking.notifications.NotificationBuilder
+import com.kanchan.androidinternal.notifications.NotificationBuilder
 
 class AndroidApp: Application() {
     override fun onCreate() {

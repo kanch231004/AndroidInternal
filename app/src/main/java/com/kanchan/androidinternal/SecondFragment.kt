@@ -1,4 +1,4 @@
-package com.kanchan.androidsysteminternalworking
+package com.kanchan.androidinternal
 
 import android.content.Context
 import android.os.Bundle
@@ -7,14 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import com.kanchan.androidsysteminternalworking.databinding.FragmentSecondBinding
+import com.kanchan.androidinternal.databinding.FragmentSecondBinding
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_first.button_first
 import kotlinx.android.synthetic.main.fragment_replace.*
 import kotlinx.android.synthetic.main.fragment_second.*
-import kotlinx.android.synthetic.main.fragment_second.btnSecond
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

@@ -1,4 +1,4 @@
-package com.kanchan.androidsysteminternalworking
+package com.kanchan.androidinternal
 
 import org.junit.Test
 
