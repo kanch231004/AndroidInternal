@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kanchan.androidinternal.databinding.FragmentFirstBinding
-import kotlinx.android.synthetic.main.fragment_first.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -20,7 +19,8 @@ class FirstFragment : Fragment() {
         var count = 0
     }
 
-    private lateinit var binding: FragmentFirstBinding
+
+    private  var binding: FragmentFirstBinding? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,8 +41,10 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentFirstBinding.inflate(inflater, container, false)
         Log.d(TAG, "onCreateView() called with: inflater = $inflater, container = $container, savedInstanceState = $savedInstanceState")
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }*/
 
-        button_first.setOnClickListener {
+        binding?.buttonFirst?.setOnClickListener {
             fragmentManager?.beginTransaction()?.add(R.id.fragmentContainerView, SecondFragment())?.commit()
         }
 
@@ -104,6 +106,7 @@ class FirstFragment : Fragment() {
         Log.d(TAG, "onDestroy() called")
         count = 0
         super.onDestroy()
+        binding = null
     }
 
     override fun onDetach() {

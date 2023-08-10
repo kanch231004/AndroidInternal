@@ -8,9 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kanchan.androidinternal.databinding.FragmentSecondBinding
-import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_replace.*
-import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -31,11 +28,13 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
         Log.d(
             TAG,
             "onCreateView() called with: inflater = $inflater, container = $container, savedInstanceState = $savedInstanceState"
         )
-        return inflater.inflate(R.layout.fragment_replace, container, false)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -45,8 +44,8 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvTExt.setOnClickListener {
-            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, SecondFragment())?.commit()
+        binding.textviewSecond.setOnClickListener {
+            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, ThirdFragment())?.commit()
         }
         Log.d(
             TAG,

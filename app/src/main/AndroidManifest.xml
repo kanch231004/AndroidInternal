@@ -12,6 +12,7 @@
         android:theme="@style/Theme.AndroidSystemInternalWorking">
         <activity android:name="com.kanchan.backstack.ThirdActivity"></activity>
         <activity
+            android:exported="true"
             android:name="com.kanchan.androidinternal.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidSystemInternalWorking.NoActionBar">

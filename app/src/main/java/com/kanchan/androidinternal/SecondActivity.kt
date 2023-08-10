@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kanchan.androidinternal.databinding.FragmentSecondBinding
 import com.kanchan.androidinternal.notifications.NotificationBuilder
 import com.kanchan.backstack.ThirdActivity
-import kotlinx.android.synthetic.main.fragment_second.*
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding : FragmentSecondBinding
@@ -18,8 +17,9 @@ class SecondActivity : AppCompatActivity() {
         binding = FragmentSecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val intent = Intent(binding.root.context, ThirdActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(binding.root.context, 0 , intent, 0)
-        btnSecond.setOnClickListener {
+        val pendingIntent = PendingIntent.getActivity(binding.root.context, 0 , intent,
+            PendingIntent.FLAG_IMMUTABLE)
+        binding.btnSecond.setOnClickListener {
             NotificationBuilder.showNotification(
                 NotificationBuilder.notificationBuilder(
                 context = binding.root.context,
