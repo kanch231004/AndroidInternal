@@ -17,6 +17,7 @@ class BindingActivity: AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
            val binder = service as LocalService.LocalBinder
             mService = binder.getService()
+            mService.communicateWithService()
             mBound  = true
         }
 

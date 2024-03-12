@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.kanchan.androidinternal.databinding.ActivityMainBinding
-import com.kanchan.coroutines.MainActivityViewModel
+import com.kanchan.coroutines.TestCoroutineVM
+import com.kanchan.coroutines.TestCoroutineActivity
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainVM: MainActivityViewModel
+    private lateinit var mainVM: TestCoroutineVM
     companion object {
         val TAG = "MainActivity"
     }
@@ -21,17 +23,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mainVM = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        mainVM = ViewModelProvider(this).get(TestCoroutineVM::class.java)
 
         binding.fab.setOnClickListener { view ->
-            startActivity(Intent(this,SecondActivity::class.java))
+           // startActivity(Intent(this,TestCoroutineActivity::class.java))
+            mainVM.cancelJob()
         }
+
         testCoroutines()
+        Log.d(TAG, "onCreate() called")
     }
 
     private fun testCoroutines() {
-        mainVM.makeLongCallWithCustomScope()
-        mainVM.makeLongCall()
+//      mainVM.makeLongCallWithCustomScope()
+//      mainVM.makeLongCall()
+  //      mainVM.checkRunBlocking()
+        mainVM.testCoroutineCancel()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -75,5 +83,9 @@ class MainActivity : AppCompatActivity() {
     override fun isChangingConfigurations(): Boolean {
         Log.d(TAG, "isChangingConfigurations: called")
         return super.isChangingConfigurations()
+    }
+
+    override fun reportFullyDrawn() {
+        super.reportFullyDrawn()
     }
 }

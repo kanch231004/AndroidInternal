@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.kanchan.androidinternal.SecondActivity" />
+        <activity android:name="com.kanchan.coroutines.TestCoroutineActivity" />
     </application>
 
 </manifest>
