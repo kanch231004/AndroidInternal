@@ -6,23 +6,30 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 const val TAG = "MainActivityVM"
-class TestCoroutineVM: ViewModel() {
-    var job: Job? = null
+
+class TestCoroutineVM : ViewModel() {
+    private var job: Job? = null
+    val scope = viewModelScope
     fun makeLongCall() {
         viewModelScope.launch {
             var i = 0
             while (i++ < 10) {
                 delay(1000)
-                Log.d("MainActivityVM", "makeLongCall VM scope: ${this.coroutineContext.toString()}")
+                Log.d(
+                    "MainActivityVM",
+                    "makeLongCall VM scope: ${this.coroutineContext.toString()}"
+                )
             }
         }
     }
@@ -32,7 +39,10 @@ class TestCoroutineVM: ViewModel() {
             var i = 0
             while (i++ < 10) {
                 delay(1000)
-                Log.d("MainActivityVM", "makeLongCall customScope: ${this.coroutineContext.toString()}")
+                Log.d(
+                    "MainActivityVM",
+                    "makeLongCall customScope: ${this.coroutineContext.toString()}"
+                )
             }
         }
     }
@@ -54,18 +64,20 @@ class TestCoroutineVM: ViewModel() {
     }
 
 
-     fun testCoroutineCancel() {
-         job = viewModelScope.launch {
-            for ( i in 1..10) {
-                delay(1000)
-                Log.d(TAG, "testCoroutineCancel: print $i")
+    fun testCoroutineCancel() {
+        job = scope.launch(Dispatchers.IO) {
+            while (isActive) {
+                for (i in 1..1000000000000000) {
+                   // delay(10)
+                    Log.d(TAG, "testCoroutineCancel: print $i")
+                }
             }
+
         }
     }
 
     fun cancelJob() = runBlocking {
         try {
-            delay(4000)
             job?.cancel()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -80,13 +92,12 @@ class TestCoroutineVM: ViewModel() {
 
     suspend fun testCombineAndZip() {
 
-        val flowInt = flowOf<Int>(2,3,4).onEach { delay(200) }
-       val flowString = flowOf<String> ("a", "b", "c", "d").onEach { delay(500) }
+        val flowInt = flowOf<Int>(2, 3, 4).onEach { delay(200) }
+        val flowString = flowOf<String>("a", "b", "c", "d").onEach { delay(500) }
 
-        flowInt.combine(flowString) {
-            a, b -> "$a -> $b" }
-            .collect {
-                value -> println(value)
+        flowInt.combine(flowString) { a, b -> "$a -> $b" }
+            .collect { value ->
+                println(value)
             }
     }
 }

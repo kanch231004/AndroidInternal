@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.kanchan.androidinternal.databinding.ActivityMainBinding
 import com.kanchan.coroutines.TestCoroutineVM
 import com.kanchan.coroutines.TestCoroutineActivity
+import com.kanchan.kotlin.TestKotlin
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         testCoroutines()
+        testKotlin()
         Log.d(TAG, "onCreate() called")
     }
 
@@ -87,5 +89,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun reportFullyDrawn() {
         super.reportFullyDrawn()
+    }
+
+    private fun testKotlin() {
+        TestKotlin.testHashCodes(TestKotlin.Person1(), TestKotlin.Person2())
+        TestKotlin.testObjects(TestKotlin.Person1(), TestKotlin.Person2())
+        TestKotlin.testSameClass(TestKotlin.Person1(), TestKotlin.Person1("Kanchan", "Pal"))
+        TestKotlin.testSameClass(TestKotlin.Person1(), TestKotlin.Person1("Kanchan", "Pal2"))
     }
 }
